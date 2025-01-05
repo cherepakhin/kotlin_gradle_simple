@@ -5,6 +5,7 @@ plugins {
     id("io.freefair.lombok") version "8.10"
     id("org.springframework.boot") version "3.4.1"
     id("io.spring.dependency-management") version "1.1.7"
+    kotlin("plugin.jpa") version "1.9.24"
 
     id("org.openapi.generator") version "7.0.1"
     id("io.swagger.core.v3.swagger-gradle-plugin") version "2.2.27"

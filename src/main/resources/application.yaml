@@ -19,7 +19,7 @@ spring:
     #  Для интеграционных тестов не отключаю
     #  База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM,
     #  добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
-    url: jdbc:h2:mem:easybotdb;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
+    url: jdbc:h2:mem:simple_db;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
     driverClassName: org.h2.Driver
     username: sa
     password:
@@ -31,11 +31,6 @@ spring:
     # show SQL statements in console.
     show-sql: true
     #    database-platform: hibernate.dialect.MySQL57Dialect
-    properties:
-      hibernate:
-        format_sql: true
-        hbm2ddl:
-          import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
   flyway:
     enabled: true
     generate_statistics: true
