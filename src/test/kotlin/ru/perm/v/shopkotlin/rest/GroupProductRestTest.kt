@@ -6,8 +6,8 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.doNothing
+import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 import ru.perm.v.shopkotlin.dto.GroupProductDTO
 import ru.perm.v.shopkotlin.entity.NotFoundException
@@ -24,7 +24,7 @@ class GroupProductRestTest {
 
     @Test
     fun `test all method when groups found`() {
-        val controller: GroupProductRest = GroupProductRest(groupProductService, productService)
+        val controller = GroupProductRest(groupProductService, productService)
         // Given
         val group1 = GroupProductDTO(1, "Group 1", 0, true)
         val group2 = GroupProductDTO(2, "Group 2", 1, true)
@@ -40,7 +40,7 @@ class GroupProductRestTest {
 
     @Test
     fun `test all method when no groups found`() {
-        val controller: GroupProductRest = GroupProductRest(groupProductService, productService)
+        val controller = GroupProductRest(groupProductService, productService)
         // Given
         `when`(groupProductService.findAllByOrderByNAsc()).thenReturn(emptyList())
         // When
@@ -51,7 +51,7 @@ class GroupProductRestTest {
 
     @Test
     fun deleteByN() {
-        val controller: GroupProductRest = GroupProductRest(groupProductService, productService)
+        val controller = GroupProductRest(groupProductService, productService)
         val N = 100L
 
         `when`(groupProductService.existsByN(N)).thenReturn(true)
@@ -64,7 +64,7 @@ class GroupProductRestTest {
 
     @Test
     fun deleteByIdForNotExist() {
-        val controller: GroupProductRest = GroupProductRest(groupProductService, productService)
+        val controller = GroupProductRest(groupProductService, productService)
         val N = 100L
 
         `when`(groupProductService.existsByN(N)).thenReturn(false)
@@ -75,7 +75,7 @@ class GroupProductRestTest {
 
     @Test
     fun checkExceptionOnDeleteByIdForExistSubgroup() {
-        val controller: GroupProductRest = GroupProductRest(groupProductService, productService)
+        val controller = GroupProductRest(groupProductService, productService)
         val N = 100L
 
         `when`(groupProductService.existsByN(N)).thenReturn(true)

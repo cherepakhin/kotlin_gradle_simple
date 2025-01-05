@@ -77,7 +77,7 @@ class GroupProductServiceImpl(val repository: GroupProductRepository) : GroupPro
     override fun findAllByOrderByNAsc(): List<GroupProductDTO> {
         val groups = repository.findAllByOrderByNAsc()
             .map { g -> GroupProductDTO(g.n, g.name, g.parentN, g.haveChilds) }.toList()
-        return groups;
+        return groups
 //        return repository.findAllByOrderByNAsc().stream()
 //            .map { g -> GroupProductDTO(g.n, g.name, g.parentN, g.haveChilds) }
     }
@@ -85,7 +85,7 @@ class GroupProductServiceImpl(val repository: GroupProductRepository) : GroupPro
     override fun findByNameContaining(name: String): List<GroupProductDTO> {
         val groups = repository.findByNameContaining(name)
             .map { g -> GroupProductDTO(g.n, g.name, g.parentN, g.haveChilds) }.toList()
-        return groups;
+        return groups
 //        return repository.findByNameContaining(name).stream()
 //            .map { g -> GroupProductDTO(g.n, g.name, g.parentN, g.haveChilds) }
     }
@@ -95,6 +95,6 @@ class GroupProductServiceImpl(val repository: GroupProductRepository) : GroupPro
     }
 
     override fun existProductsInGroup(n: Long): Boolean {
-        return getSubGroups(n).size > 0
+        return getSubGroups(n).isNotEmpty()
     }
 }

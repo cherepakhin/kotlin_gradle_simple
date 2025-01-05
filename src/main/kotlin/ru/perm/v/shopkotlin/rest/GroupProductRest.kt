@@ -37,7 +37,7 @@ class GroupProductRest(val service: GroupProductService, val productService: Pro
 //    @ApiOperation("Get all groups of product")
     fun all(): List<GroupProductDTO> {
         logger.info("GET all GroupProductDTO")
-        val groups: List<GroupProductDTO> = service.findAllByOrderByNAsc();
+        val groups: List<GroupProductDTO> = service.findAllByOrderByNAsc()
         if (groups.isEmpty()) {
             throw NotFoundException("No group products found.")
         }
@@ -95,7 +95,7 @@ class GroupProductRest(val service: GroupProductService, val productService: Pro
         if (service.existProductsInGroup(n)) {
             throw Exception("Group product with id: $n contains subgroups. Remove them first.")
         }
-        if (productService.getByGroupProductN(n).size > 0) {
+        if (productService.getByGroupProductN(n).isNotEmpty()) {
             throw Exception("Group product with n: $n contains products. Remove them to other group first.")
         }
         service.deleteByN(n)

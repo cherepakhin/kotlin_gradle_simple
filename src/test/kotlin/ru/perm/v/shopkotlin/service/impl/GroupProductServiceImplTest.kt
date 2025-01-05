@@ -51,8 +51,8 @@ internal class GroupProductServiceImplTest {
         val subGroups = service.getSubGroups(N)
 
         assertEquals(2, subGroups.size)
-        assertEquals(GroupProductDTO(SUB_N_101, "NAME_101", N, false), subGroups.get(0))
-        assertEquals(GroupProductDTO(SUB_N_102, "NAME_102", N, false), subGroups.get(1))
+        assertEquals(GroupProductDTO(SUB_N_101, "NAME_101", N, false), subGroups[0])
+        assertEquals(GroupProductDTO(SUB_N_102, "NAME_102", N, false), subGroups[1])
     }
 
     @Test
@@ -116,8 +116,8 @@ internal class GroupProductServiceImplTest {
         val dtos = service.findAllByOrderByNAsc()
 
         assertEquals(2, dtos.size)
-        assertEquals(GroupProductDTO(101L, "NAME_101", PARENT_ID, true), dtos.get(0))
-        assertEquals(GroupProductDTO(102L, "NAME_102", PARENT_ID, true), dtos.get(1))
+        assertEquals(GroupProductDTO(101L, "NAME_101", PARENT_ID, true), dtos[0])
+        assertEquals(GroupProductDTO(102L, "NAME_102", PARENT_ID, true), dtos[1])
 
         verify(repository, times(1)).findAllByOrderByNAsc()
     }
@@ -132,8 +132,8 @@ internal class GroupProductServiceImplTest {
         val dtos = service.findByNameContaining("NAME")
 
         assertEquals(2, dtos.size)
-        assertEquals(GroupProductDTO(101L, "NAME_101", PARENT_ID, true), dtos.get(0))
-        assertEquals(GroupProductDTO(102L, "NAME_102", PARENT_ID, true), dtos.get(1))
+        assertEquals(GroupProductDTO(101L, "NAME_101", PARENT_ID, true), dtos[0])
+        assertEquals(GroupProductDTO(102L, "NAME_102", PARENT_ID, true), dtos[1])
 
         verify(repository, times(1)).findByNameContaining("NAME")
     }

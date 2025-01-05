@@ -11,7 +11,7 @@ import ru.perm.v.shopkotlin.entity.ProductEntity
 interface ProductRepository : JpaRepository<ProductEntity, Long> {
 
     fun findAllByOrderByNAsc(): List<ProductEntity>
-    fun findAllByGroupProductNOrderByNAsc(groupProductN:Long): List<ProductEntity>
+    fun findAllByGroupProductNOrderByNAsc(groupProductN: Long): List<ProductEntity>
 
     @Query(value = "select max(p.n)+1 from product p", nativeQuery = true)
     fun getNextN(): Long

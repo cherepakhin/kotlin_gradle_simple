@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service
 import ru.perm.v.shopkotlin.dto.ProductDTO
 import ru.perm.v.shopkotlin.repository.ProductRepository
 import ru.perm.v.shopkotlin.service.ProductService
-import kotlin.streams.toList
 
 @Service
 class ProductServiceImpl(val repository: ProductRepository) : ProductService {

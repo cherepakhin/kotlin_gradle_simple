@@ -1,0 +1,1 @@
+Заготовка для проекта на Kotlin со Spring-boot (REST+JPA)
