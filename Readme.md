@@ -6,7 +6,6 @@
 ./gradlee bootRun
 ````
 
-
 Тест REST echo:
 
 ````shell
@@ -73,4 +72,15 @@ Content-Type: application/json
         "parentN": 1
     }
 ]
+````
+
+````shell
+http :8780/api/group_product/6
+
+{
+  "haveChilds": false,
+  "n": 6,
+  "name": "Hard drives",
+  "parentN": 1
+}
 ````
