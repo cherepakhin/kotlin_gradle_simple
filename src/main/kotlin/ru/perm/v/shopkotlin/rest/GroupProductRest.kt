@@ -1,5 +1,6 @@
 package ru.perm.v.shopkotlin.rest
 
+import io.swagger.annotations.ApiOperation
 import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
@@ -25,6 +26,7 @@ class GroupProductRest(val service: GroupProductService, val productService: Pro
     //TODO: get sub groups
 
     @GetMapping("/{n}")
+    @ApiOperation("Get group of product by n")
     fun getById(@PathVariable n: Long): GroupProductDTO {
         return service.getByN(n)
     }
@@ -34,7 +36,7 @@ class GroupProductRest(val service: GroupProductService, val productService: Pro
      */
     @GetMapping("/")
     @Cacheable("allGroupProductDTO")
-//    @ApiOperation("Get all groups of product")
+    @ApiOperation("Get all groups of product")
     fun all(): List<GroupProductDTO> {
         logger.info("GET all GroupProductDTO")
         val groups: List<GroupProductDTO> = service.findAllByOrderByNAsc()
