@@ -8,7 +8,7 @@ server:
 
 spring:
   application:
-    name: easybotshop
+    name: kotlin_gradle_simple
   h2:
     console:
       enabled: true
