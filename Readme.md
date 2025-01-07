@@ -84,3 +84,20 @@ http :8780/api/group_product/6
   "parentN": 1
 }
 ````
+
+Подготовка проекта:
+
+````shell
+$ echo $JAVA_HOME
+/usr/lib/jvm/java-17-openjdk-amd64
+$ git init
+$ git branch main
+$ git branch
+* main
+  master
+  
+# добавление удалённого репозитория к локальному в Git
+# git remote add <shortname> <url>  
+$ git remote add origin https://github.com/cherepakhin/kotlin_gradle_simple.git
+$ git push -u origin main
+````
