@@ -147,3 +147,19 @@ $ export NEXUS_CRED_PSW=pass
 ````shell
 $ ./gradlew publish
 ````
+
+Просмотр путей внешних репозиториев:
+
+````shell
+e$ git remote show origin
+* внешний репозиторий origin
+  URL для извлечения: https://github.com/cherepakhin/kotlin_gradle_simple.git
+  URL для отправки: https://github.com/cherepakhin/kotlin_gradle_simple.git
+  HEAD ветка: main
+  Внешняя ветка:
+    main отслеживается
+  Локальная ветка, настроенная для «git pull»:
+    main будет слита с внешней веткой main
+  Локальная ссылка, настроенная для «git push»:
+    main будет отправлена в main (уже актуальна)
+````
