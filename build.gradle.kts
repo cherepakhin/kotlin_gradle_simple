@@ -7,12 +7,14 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.jpa") version "1.9.24"
 
+    id("maven-publish")
+
     id("org.openapi.generator") version "7.0.1"
     id("io.swagger.core.v3.swagger-gradle-plugin") version "2.2.27"
 }
 
-group = "com.example"
-version = "0.0.1-SNAPSHOT"
+group = "ru.perm.v"
+version = "0.0.2"
 
 java {
     toolchain {
@@ -22,6 +24,15 @@ java {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("http://v.perm.ru:8081/repository/ru.perm.v") //OK
+        isAllowInsecureProtocol = true
+        credentials {
+            username = "admin"
+            password = "pass"
+        }
+    }
+
 }
 
 dependencies {
@@ -49,4 +60,25 @@ kotlin {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+publishing {
+    repositories {
+        maven {
+            url = uri("http://v.perm.ru:8081/repository/ru.perm.v/")
+            isAllowInsecureProtocol = true
+            //  publish в nexus "./gradlew publish" из ноута и Jenkins проходит
+            // export NEXUS_CRED_USR=admin
+            // echo $NEXUS_CRED_USR
+            credentials {
+                username = System.getenv("NEXUS_CRED_USR")
+                password = System.getenv("NEXUS_CRED_PSW")
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("maven"){
+            artifact(tasks["bootJar"])
+        }
+    }
 }
