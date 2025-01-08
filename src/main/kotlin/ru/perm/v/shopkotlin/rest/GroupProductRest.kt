@@ -17,7 +17,7 @@ import ru.perm.v.shopkotlin.service.ProductService
  * Определяет ТОЛЬКО интерфейсы доступа к сервису. Маппинг в DTO делается в сервисе
  * (уход от lazy проблем, независимость от способа получения самих DTO и т.п.).
  */
-class GroupProductRest(val service: GroupProductService, val productService: ProductService) {
+class GroupProductRest(val groupProductService: GroupProductService, val productService: ProductService) {
 
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
@@ -28,7 +28,7 @@ class GroupProductRest(val service: GroupProductService, val productService: Pro
     @GetMapping("/{n}")
     @ApiOperation("Get group of product by n")
     fun getById(@PathVariable n: Long): GroupProductDTO {
-        return service.getByN(n)
+        return groupProductService.getByN(n)
     }
 
     /**
@@ -39,7 +39,7 @@ class GroupProductRest(val service: GroupProductService, val productService: Pro
     @ApiOperation("Get all groups of product")
     fun all(): List<GroupProductDTO> {
         logger.info("GET all GroupProductDTO")
-        val groups: List<GroupProductDTO> = service.findAllByOrderByNAsc()
+        val groups: List<GroupProductDTO> = groupProductService.findAllByOrderByNAsc()
         if (groups.isEmpty()) {
             throw NotFoundException("No group products found.")
         }
@@ -67,7 +67,7 @@ class GroupProductRest(val service: GroupProductService, val productService: Pro
 //    @ApiOperation("Find groups by name")
     //TODO NO TEST!
     fun findByName(name: String): List<GroupProductDTO> {
-        val groups = service.findByNameContaining(name).toList()
+        val groups = groupProductService.findByNameContaining(name).toList()
         if (groups.isEmpty()) {
             throw NotFoundException("No group products found.")
         }
@@ -91,20 +91,20 @@ class GroupProductRest(val service: GroupProductService, val productService: Pro
 
     @DeleteMapping("/{n}")
     fun deleteByN(n: Long) {
-        if (!service.existsByN(n)) {
+        if (!groupProductService.existsByN(n)) {
             throw NotFoundException("Group product not found with id: $n")
         }
-        if (service.existProductsInGroup(n)) {
+        if (groupProductService.existProductsInGroup(n)) {
             throw Exception("Group product with id: $n contains subgroups. Remove them first.")
         }
-        if (productService.getByGroupProductN(n).isNotEmpty()) {
+        if (productService.getByGroupN(n).isNotEmpty()) {
             throw Exception("Group product with n: $n contains products. Remove them to other group first.")
         }
-        service.deleteByN(n)
+        groupProductService.deleteByN(n)
     }
 
     @PostMapping
     fun create(@RequestBody groupProductDTO: GroupProductDTO) {
-        service.create(groupProductDTO)
+        groupProductService.create(groupProductDTO)
     }
 }

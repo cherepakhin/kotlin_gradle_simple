@@ -7,7 +7,7 @@ import ru.perm.v.shopkotlin.service.ProductService
 
 @Service
 class ProductServiceImpl(val repository: ProductRepository) : ProductService {
-    override fun getByGroupProductN(n: Long): List<ProductDTO> {
+    override fun getByGroupN(n: Long): List<ProductDTO> {
         return repository.findAllByGroupProductNOrderByNAsc(n).stream()
             .map { ProductDTO(it.n, it.name, it.groupProductN) }.toList()
     }
