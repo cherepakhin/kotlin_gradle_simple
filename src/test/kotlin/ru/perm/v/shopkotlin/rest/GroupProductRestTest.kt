@@ -85,4 +85,19 @@ class GroupProductRestTest {
         Mockito.verify(groupProductService, Mockito.times(0)).deleteByN(N)
         Mockito.verify(groupProductService, Mockito.times(1)).existProductsInGroup(N)
     }
+
+    @Test
+    fun getByN() {
+        val ID = 100L
+        val NAME = "NAME"
+        val PARENT_N = 10L
+        val groupProductDTO = GroupProductDTO(ID, NAME, PARENT_N)
+        `when`(groupProductService.getByN(ID)).thenReturn(groupProductDTO)
+
+        val controller = GroupProductRest(groupProductService, productService)
+        val receivedGroupProduct = controller.getById(ID)
+
+        assertEquals(GroupProductDTO(ID, NAME, PARENT_N), receivedGroupProduct)
+
+    }
 }
