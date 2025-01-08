@@ -1,6 +1,7 @@
 package ru.perm.v.shopkotlin.service.impl
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
@@ -29,5 +30,16 @@ class ProductServiceImplTest {
         val productDTO = service.getByN(N)
 
         assertEquals(ProductDTO(N, "NAME", GROUP_N), productDTO)
+    }
+
+    @Test
+    fun getByNotExistN() {
+        val N = 100L
+
+        val service = ProductServiceImpl(repository)
+        `when`(repository.existsById(N)).thenReturn(false)
+        val excpt = assertThrows<Exception> { service.getByN(N) }
+
+        assertEquals("Not found product with n=100", excpt.message)
     }
 }
