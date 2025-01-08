@@ -11,4 +11,14 @@ class ProductServiceImpl(val repository: ProductRepository) : ProductService {
         return repository.findAllByGroupProductNOrderByNAsc(n).stream()
             .map { ProductDTO(it.n, it.name, it.groupProductN) }.toList()
     }
+
+    override fun getByN(productN: Long): ProductDTO {
+        if (repository.existsById(productN)) {
+            val productEntity = repository.getReferenceById(productN)
+            return ProductDTO(productEntity.n, productEntity.name, productEntity.groupProductN)
+        } else {
+            throw Exception("Not found product with n=${productN}")
+        }
+    }
+
 }

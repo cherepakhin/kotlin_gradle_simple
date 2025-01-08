@@ -4,4 +4,5 @@ import ru.perm.v.shopkotlin.dto.ProductDTO
 
 interface ProductService {
     fun getByGroupN(groupN: Long): List<ProductDTO>
+    fun getByN(productN: Long): ProductDTO
 }

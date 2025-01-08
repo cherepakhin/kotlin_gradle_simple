@@ -19,4 +19,11 @@ class ProductRest(val productService: ProductService) {
     fun getProductsByGroupN(@PathVariable("groupN") groupN: Long): List<ProductDTO> {
         return productService.getByGroupN(groupN)
     }
+
+    @GetMapping("/{n}")
+    @ApiOperation("Get number of product in group")
+    fun getProductByN(@PathVariable("n") n: Long): List<ProductDTO> {
+        return productService.getByGroupN(n)
+    }
+
 }
