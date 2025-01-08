@@ -61,4 +61,22 @@ class ProductServiceImplTest {
 
         assertEquals("Group of product 100 not exist.", excpt.message)
     }
+
+    @Test
+    fun getProductsByGroupN() {
+        val GROUP_N = 100L
+
+        val mockProductRepository = Mockito.mock(ProductRepository::class.java)
+        val mockGroupProductService = Mockito.mock(GroupProductServiceImpl::class.java)
+        val productService = ProductServiceImpl(mockProductRepository, mockGroupProductService)
+        `when`(mockGroupProductService.existsByN(GROUP_N)).thenReturn(true)
+        val product1 = ProductEntity(1L,"NAME_1", GROUP_N)
+        val product2 = ProductEntity(2L,"NAME_2", GROUP_N)
+        `when`(mockProductRepository.findAllByGroupProductNOrderByNAsc(GROUP_N)).thenReturn(listOf(product1, product2))
+
+        val products = productService.getProductsByGroupN(GROUP_N)
+
+        assertEquals(2, products.size)
+    }
+
 }
