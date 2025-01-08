@@ -13,14 +13,6 @@ import ru.perm.v.shopkotlin.service.ProductService
 @RestController
 @RequestMapping("/product")
 class ProductRest(val productService: ProductService) {
-    //TODO: add CRUD
-    @GetMapping("/count_names")
-    @ApiOperation("Get number of product NAMES")
-    fun getNumberOfProductNames(): Long {
-        //TODO: getNumberOfProductNames
-        return 0
-//        return repository.getNumberOfProductNames()
-    }
 
     @GetMapping("/by_group_n/{groupN}")
     @ApiOperation("Get number of product in group")
