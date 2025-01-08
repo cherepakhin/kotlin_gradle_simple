@@ -77,6 +77,8 @@ class ProductServiceImplTest {
         val products = productService.getProductsByGroupN(GROUP_N)
 
         assertEquals(2, products.size)
+        assertEquals(ProductDTO(1L,"NAME_1", GROUP_N), products.get(0))
+        assertEquals(ProductDTO(2L,"NAME_2", GROUP_N), products.get(1))
     }
 
 }
