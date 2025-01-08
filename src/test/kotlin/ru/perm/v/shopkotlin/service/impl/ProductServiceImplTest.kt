@@ -20,14 +20,14 @@ class ProductServiceImplTest {
     private lateinit var repository: ProductRepository
 
     @Mock
-    private lateinit var gropProductService: GroupProductService
+    private lateinit var groupProductService: GroupProductService
 
     @Test
     fun getByN() {
         val N = 100L
         val GROUP_N = 1L
 
-        val service = ProductServiceImpl(repository,gropProductService)
+        val service = ProductServiceImpl(repository,groupProductService)
         val productEntity = ProductEntity(N, "NAME", GROUP_N)
         `when`(repository.existsById(N)).thenReturn(true)
         `when`(repository.getReferenceById(N)).thenReturn(productEntity)
@@ -42,10 +42,23 @@ class ProductServiceImplTest {
         val N = 100L
 
         val mockProductRepository = Mockito.mock(ProductRepository::class.java)
-        val service = ProductServiceImpl(mockProductRepository, gropProductService)
+        val service = ProductServiceImpl(mockProductRepository, groupProductService)
         `when`(mockProductRepository.existsById(N)).thenReturn(false)
         val excpt = assertThrows<Exception> { service.getProductByN(N) }
 
         assertEquals("Not found product with n=100", excpt.message)
+    }
+
+    @Test
+    fun getByNotExistGroupProduct() {
+        val GROUP_N = 100L
+
+        val mockProductRepository = Mockito.mock(ProductRepository::class.java)
+        val mockGroupProductService = Mockito.mock(GroupProductServiceImpl::class.java)
+        val productService = ProductServiceImpl(mockProductRepository, mockGroupProductService)
+        `when`(mockGroupProductService.existsByN(GROUP_N)).thenReturn(false)
+        val excpt = assertThrows<Exception> { productService.getProductsByGroupN(GROUP_N) }
+
+        assertEquals("Group of product 100 not exist.", excpt.message)
     }
 }

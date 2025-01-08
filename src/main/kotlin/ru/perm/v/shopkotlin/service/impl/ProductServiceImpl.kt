@@ -9,7 +9,7 @@ import ru.perm.v.shopkotlin.service.ProductService
 @Service
 class ProductServiceImpl(val repository: ProductRepository, val groupProductService: GroupProductService) : ProductService {
     override fun getProductsByGroupN(groupN: Long): List<ProductDTO> {
-        if(groupProductService.existProductsInGroup(groupN)) {
+        if(!groupProductService.existsByN(groupN)) {
             throw Exception("Group of product ${groupN} not exist.")
         }
         return repository.findAllByGroupProductNOrderByNAsc(groupN).stream()
