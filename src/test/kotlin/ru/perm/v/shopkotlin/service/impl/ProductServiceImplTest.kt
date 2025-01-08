@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 import ru.perm.v.shopkotlin.dto.ProductDTO
@@ -36,8 +37,9 @@ class ProductServiceImplTest {
     fun getByNotExistN() {
         val N = 100L
 
-        val service = ProductServiceImpl(repository)
-        `when`(repository.existsById(N)).thenReturn(false)
+        val mockRepository = Mockito.mock(ProductRepository::class.java)
+        val service = ProductServiceImpl(mockRepository)
+        `when`(mockRepository.existsById(N)).thenReturn(false)
         val excpt = assertThrows<Exception> { service.getByN(N) }
 
         assertEquals("Not found product with n=100", excpt.message)
