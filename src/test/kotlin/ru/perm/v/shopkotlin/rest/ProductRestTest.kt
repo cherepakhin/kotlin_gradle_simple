@@ -26,7 +26,7 @@ internal class ProductRestTest {
             ProductDTO(1L, "NAME_1", GROUP_N),
             ProductDTO(2L, "NAME_2", GROUP_N),
         )
-        Mockito.`when`(service.getByGroupN(GROUP_N)).thenReturn(products)
+        Mockito.`when`(service.getProductsByGroupN(GROUP_N)).thenReturn(products)
 
         val receivedProducts = productRest.getProductsByGroupN(GROUP_N)
 

@@ -17,13 +17,13 @@ class ProductRest(val productService: ProductService) {
     @GetMapping("/by_group_n/{groupN}")
     @ApiOperation("Get number of product in group")
     fun getProductsByGroupN(@PathVariable("groupN") groupN: Long): List<ProductDTO> {
-        return productService.getByGroupN(groupN)
+        return productService.getProductsByGroupN(groupN)
     }
 
     @GetMapping("/{n}")
     @ApiOperation("Get number of product in group")
     fun getProductByN(@PathVariable("n") n: Long): List<ProductDTO> {
-        return productService.getByGroupN(n)
+        return productService.getProductsByGroupN(n)
     }
 
 }

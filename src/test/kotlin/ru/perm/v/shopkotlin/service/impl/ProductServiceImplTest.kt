@@ -28,7 +28,7 @@ class ProductServiceImplTest {
         `when`(repository.existsById(N)).thenReturn(true)
         `when`(repository.getReferenceById(N)).thenReturn(productEntity)
 
-        val productDTO = service.getByN(N)
+        val productDTO = service.getProductByN(N)
 
         assertEquals(ProductDTO(N, "NAME", GROUP_N), productDTO)
     }
@@ -40,7 +40,7 @@ class ProductServiceImplTest {
         val mockRepository = Mockito.mock(ProductRepository::class.java)
         val service = ProductServiceImpl(mockRepository)
         `when`(mockRepository.existsById(N)).thenReturn(false)
-        val excpt = assertThrows<Exception> { service.getByN(N) }
+        val excpt = assertThrows<Exception> { service.getProductByN(N) }
 
         assertEquals("Not found product with n=100", excpt.message)
     }

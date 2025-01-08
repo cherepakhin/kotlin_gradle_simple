@@ -97,7 +97,7 @@ class GroupProductRest(val groupProductService: GroupProductService, val product
         if (groupProductService.existProductsInGroup(n)) {
             throw Exception("Group product with id: $n contains subgroups. Remove them first.")
         }
-        if (productService.getByGroupN(n).isNotEmpty()) {
+        if (productService.getProductsByGroupN(n).isNotEmpty()) {
             throw Exception("Group product with n: $n contains products. Remove them to other group first.")
         }
         groupProductService.deleteByN(n)
