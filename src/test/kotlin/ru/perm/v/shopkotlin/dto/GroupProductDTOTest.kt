@@ -3,6 +3,7 @@ package ru.perm.v.shopkotlin.dto
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import kotlin.test.assertFalse
 
 internal class GroupProductDTOTest {
 
@@ -16,4 +17,25 @@ internal class GroupProductDTOTest {
         assertEquals(NAME, group.name)
         assertTrue(group.haveChilds)
     }
+
+    @Test
+    fun defaultConstructor() {
+        val groupProductDTO = GroupProductDTO()
+
+        assertEquals(-1L, groupProductDTO.n)
+        assertEquals("", groupProductDTO.name)
+        assertEquals(-1L, groupProductDTO.parentN)
+        assertFalse(groupProductDTO.haveChilds)
+    }
+
+    @Test
+    fun constructorWithParam() {
+        val groupProductDTO = GroupProductDTO(1L, "NAME", 100L, true)
+
+        assertEquals(1L, groupProductDTO.n)
+        assertEquals("NAME", groupProductDTO.name)
+        assertEquals(100L, groupProductDTO.parentN)
+        assertTrue(groupProductDTO.haveChilds)
+    }
+
 }

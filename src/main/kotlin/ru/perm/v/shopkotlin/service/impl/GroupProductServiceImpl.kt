@@ -17,7 +17,7 @@ class GroupProductServiceImpl(val repository: GroupProductRepository) : GroupPro
         val groupProductEntity = repository.getByN(n)
 //            ?: throw Exception(String.format("GroupProduct with n=%s not exist ", n))
 // В java так
-//        if (groupProductEntity == null) {
+//        if 1(groupProductEntity == null) {
 //            throw Exception(String.format("GroupProduct with n=%s not exist ", n))
 //        }
         return GroupProductDTO(
@@ -78,16 +78,12 @@ class GroupProductServiceImpl(val repository: GroupProductRepository) : GroupPro
         val groups = repository.findAllByOrderByNAsc()
             .map { g -> GroupProductDTO(g.n, g.name, g.parentN, g.haveChilds) }.toList()
         return groups
-//        return repository.findAllByOrderByNAsc().stream()
-//            .map { g -> GroupProductDTO(g.n, g.name, g.parentN, g.haveChilds) }
     }
 
     override fun findByNameContaining(name: String): List<GroupProductDTO> {
         val groups = repository.findByNameContaining(name)
             .map { g -> GroupProductDTO(g.n, g.name, g.parentN, g.haveChilds) }.toList()
         return groups
-//        return repository.findByNameContaining(name).stream()
-//            .map { g -> GroupProductDTO(g.n, g.name, g.parentN, g.haveChilds) }
     }
 
     override fun existsByN(n: Long): Boolean {

@@ -34,4 +34,30 @@ internal class ProductDTOTest {
 
         assertNotEquals(product1, product2) // as in java
     }
+
+    @Test
+    fun defaultConstructor() {
+        val productDTO = ProductDTO()
+
+        assertEquals(-1L, productDTO.n)
+        assertEquals("", productDTO.name)
+        assertEquals(-1, productDTO.groupDtoN)
+    }
+
+    @Test
+    fun constructorWithParam() {
+        val productDTO = ProductDTO(100L, "NAME", 10L)
+
+        assertEquals(100L, productDTO.n)
+        assertEquals("NAME", productDTO.name)
+        assertEquals(10L, productDTO.groupDtoN)
+    }
+
+    @Test
+    fun checkHashCode() {
+        val productDTO1 = ProductDTO(1L, "NAME", 2L)
+        val productDTO2 = ProductDTO(1L, "NAME", 2L)
+
+        assertEquals(productDTO1.hashCode(), productDTO2.hashCode())
+    }
 }
