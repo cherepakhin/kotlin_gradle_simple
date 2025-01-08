@@ -11,6 +11,9 @@ plugins {
 
     id("org.openapi.generator") version "7.0.1"
     id("io.swagger.core.v3.swagger-gradle-plugin") version "2.2.27"
+
+    java
+    jacoco
 }
 
 group = "ru.perm.v"
@@ -82,3 +85,4 @@ publishing {
         }
     }
 }
+

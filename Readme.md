@@ -23,6 +23,15 @@ $ git push -u origin main
 ./gradlew test
 ````
 
+Генерация отчета покрытия тестами JaCoCo:
+
+````shell
+./gradlew jacocoTestReport
+````
+
+Отчет будет сформирован kotlin_gradle_simple/build/reports/jacoco/test/html/index.html
+[jacoco_report.png](doc/jacoco_report.png)
+
 ## Запуск:
 
 ````shell
