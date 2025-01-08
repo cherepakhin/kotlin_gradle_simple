@@ -22,9 +22,9 @@ class ProductRest(val productService: ProductService) {
 //        return repository.getNumberOfProductNames()
     }
 
-    @GetMapping("/count_in_group_n/{groupN}")
+    @GetMapping("/by_group_n/{groupN}")
     @ApiOperation("Get number of product in group")
-    fun getProductsInGroup(@PathVariable("groupN") groupN: Long): List<ProductDTO> {
+    fun getProductsByGroupN(@PathVariable("groupN") groupN: Long): List<ProductDTO> {
         return productService.getByGroupN(groupN)
     }
 }

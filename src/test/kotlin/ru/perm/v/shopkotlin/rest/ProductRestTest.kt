@@ -1,6 +1,7 @@
 package ru.perm.v.shopkotlin.rest
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
@@ -27,6 +28,11 @@ internal class ProductRestTest {
             ProductDTO(2L, "NAME_2", GROUP_N),
         )
         Mockito.`when`(service.getByGroupN(GROUP_N)).thenReturn(products)
-        Assertions.assertEquals(2, productRest.getProductsInGroup(GROUP_N).size)
+
+        val receivedProducts = productRest.getProductsByGroupN(GROUP_N)
+
+        assertEquals(2, receivedProducts.size)
+        assertEquals(ProductDTO(1L, "NAME_1", GROUP_N), receivedProducts.get(0))
+        assertEquals(ProductDTO(2L, "NAME_2", GROUP_N), receivedProducts.get(1))
     }
 }
