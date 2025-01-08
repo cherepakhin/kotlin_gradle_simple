@@ -167,4 +167,17 @@ internal class GroupProductServiceImplTest {
         `when`(repository.findAllByParentN(PARENT_ID)).thenReturn(listOf())
         assertFalse(service.existProductsInGroup(PARENT_ID))
     }
+
+    @Test
+    fun deleteNotExistGroupProduct() {
+        val ID = 100L
+        `when`(repository.existsByN(ID)).thenReturn(false)
+
+        val error = assertThrows<Exception> {
+            service.deleteByN(ID)
+        }
+
+        assertEquals("Not exist GroupProduct with n=100", error.message)
+    }
+
 }

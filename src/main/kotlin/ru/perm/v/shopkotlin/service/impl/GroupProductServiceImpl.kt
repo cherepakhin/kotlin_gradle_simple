@@ -69,9 +69,10 @@ class GroupProductServiceImpl(val repository: GroupProductRepository) : GroupPro
     }
 
     override fun deleteByN(n: Long) {
-        if (existsByN(n)) {
-            repository.deleteByN(n)
+        if (!existsByN(n)) {
+            throw Exception("Not exist GroupProduct with n=$n")
         }
+        repository.deleteByN(n)
     }
 
     override fun findAllByOrderByNAsc(): List<GroupProductDTO> {
