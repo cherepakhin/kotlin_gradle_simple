@@ -30,7 +30,9 @@ $ git push -u origin main
 ````
 
 Отчет будет сформирован kotlin_gradle_simple/build/reports/jacoco/test/html/index.html
-[jacoco_report.png](doc/jacoco_report.png)
+
+![jacoco_report.png](doc/jacoco_report.png)
+
 
 ## Запуск:
 
