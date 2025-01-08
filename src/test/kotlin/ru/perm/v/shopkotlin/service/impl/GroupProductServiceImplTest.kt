@@ -3,6 +3,7 @@ package ru.perm.v.shopkotlin.service.impl
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.*
@@ -85,6 +86,18 @@ internal class GroupProductServiceImplTest {
         val savedGroup = service.update(groupDtoForSave)
 
         assertEquals(GroupProductDTO(101L, "NAME_101", PARENT_N, true), savedGroup)
+    }
+
+    @Test
+    fun updateNotExistGroupProduct() {
+        val PARENT_N = 100L
+        val groupDtoForSave = GroupProductDTO(101L, "NAME_101", PARENT_N, true)
+
+        `when`(repository.existsByN(101L)).thenReturn(false)
+
+        val excpt = assertThrows<Exception> { service.update(groupDtoForSave) }
+
+        assertEquals("GroupProduct with n=101 not exist", excpt.message)
     }
 
     @Test

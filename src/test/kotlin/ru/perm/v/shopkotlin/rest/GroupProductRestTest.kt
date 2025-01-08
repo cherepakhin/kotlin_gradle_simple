@@ -100,4 +100,29 @@ class GroupProductRestTest {
         assertEquals(GroupProductDTO(ID, NAME, PARENT_N), receivedGroupProduct)
 
     }
+
+    @Test
+    fun findByName() {
+        val controller = GroupProductRest(groupProductService, productService)
+        val NAME = "NAME"
+
+        val group1 = GroupProductDTO(1, NAME, 0, true)
+        val group2 = GroupProductDTO(2, NAME, 1, true)
+        `when`(groupProductService.findByNameContaining(NAME)).thenReturn(listOf(group1, group2))
+
+        val foundGroups = controller.findByName(NAME)
+
+        assertEquals(listOf(group1, group2), foundGroups)
+    }
+
+    @Test
+    fun findByNotExistName() {
+        val controller = GroupProductRest(groupProductService, productService)
+        val NAME = "NAME"
+
+        `when`(groupProductService.findByNameContaining(NAME)).thenReturn(emptyList())
+
+        val excpt = assertThrows<Exception> {   controller.findByName(NAME) }
+        assertEquals("Group not found.", excpt.message)
+    }
 }

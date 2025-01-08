@@ -45,7 +45,7 @@ class GroupProductServiceImpl(val repository: GroupProductRepository) : GroupPro
     // Можно совместить с create() или даже сделать один save(). Но сделал именно так.
     override fun update(groupProductDTO: GroupProductDTO): GroupProductDTO {
         if (!existsByN(groupProductDTO.n)) {
-            throw Exception(String.format("GroupProduct with n=%s not exist ", groupProductDTO.n))
+            throw Exception(String.format("GroupProduct with n=%s not exist", groupProductDTO.n))
         }
         val groupProductEntity = GroupProductEntity(
             groupProductDTO.n, groupProductDTO.name, groupProductDTO.parentN, groupProductDTO.haveChilds

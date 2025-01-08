@@ -65,11 +65,10 @@ class GroupProductRest(val groupProductService: GroupProductService, val product
 
     @GetMapping("/find")
 //    @ApiOperation("Find groups by name")
-    //TODO NO TEST!
     fun findByName(name: String): List<GroupProductDTO> {
         val groups = groupProductService.findByNameContaining(name).toList()
         if (groups.isEmpty()) {
-            throw NotFoundException("No group products found.")
+            throw NotFoundException("Group not found.")
         }
         return groups.map { entity ->
             GroupProductDTO(entity.n, entity.name, entity.parentN, entity.haveChilds)
